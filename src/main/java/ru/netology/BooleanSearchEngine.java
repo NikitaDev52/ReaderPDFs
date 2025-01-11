@@ -47,6 +47,6 @@ public class BooleanSearchEngine implements SearchEngine{
 
     @Override
     public List<PageEntry> search(String word) {
-        return null;
+        return wordsFromPdf.get(word);
     }
 }
