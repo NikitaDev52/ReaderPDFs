@@ -7,16 +7,13 @@ import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BooleanSearchEngine implements SearchEngine{
     private Map<String, List<PageEntry>> wordsFromPdf = new HashMap<>();
 
     public BooleanSearchEngine(File pdfsDir) throws IOException {
-        if (pdfsDir.exists() && pdfsDir.isDirectory() && pdfsDir.length() > 0) {
+        if (pdfsDir.exists() && pdfsDir.isDirectory() && Objects.requireNonNull(pdfsDir.listFiles()).length > 0) {
             File[] pdsf = pdfsDir.listFiles();
             for (File pdf : pdsf) {
                 PdfDocument doc = new PdfDocument(new PdfReader(pdf));
@@ -35,7 +32,8 @@ public class BooleanSearchEngine implements SearchEngine{
                     for (Map.Entry<String, Integer> entry : freqs.entrySet()) {
                         String word = entry.getKey();
                         int count = entry.getValue();
-                        PageEntry pageEntry = new PageEntry(pdf.getName(), i, count);
+                        int pageFromDoc = i;
+                        PageEntry pageEntry = new PageEntry(pdf.getName(), pageFromDoc, count);
 
                         wordsFromPdf.computeIfAbsent(word, k -> new ArrayList<>()).add(pageEntry);
                     }
@@ -47,6 +45,6 @@ public class BooleanSearchEngine implements SearchEngine{
 
     @Override
     public List<PageEntry> search(String word) {
-        return wordsFromPdf.get(word);
+        return wordsFromPdf.getOrDefault(word.toLowerCase(), new ArrayList<>());
     }
 }
