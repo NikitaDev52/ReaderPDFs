@@ -1,4 +1,6 @@
-package ru.netology;
+package ru.netology.SearchEngine;
+
+import java.util.Objects;
 
 public class PageEntry implements Comparable<PageEntry>{
     private String pdfName;
@@ -47,5 +49,19 @@ public class PageEntry implements Comparable<PageEntry>{
     @Override
     public int compareTo(PageEntry o) {
         return Integer.compare(o.getCount(), count);
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PageEntry pageEntry = (PageEntry) o;
+        return page == pageEntry.page &&
+                count == pageEntry.count &&
+                Objects.equals(pdfName, pageEntry.pdfName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pdfName, page, count);
     }
 }
