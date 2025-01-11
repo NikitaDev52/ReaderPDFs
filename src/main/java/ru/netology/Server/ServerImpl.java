@@ -1,6 +1,8 @@
-package ru.netology;
+package ru.netology.Server;
 
 import com.google.gson.Gson;
+import ru.netology.SearchEngine.PageEntry;
+import ru.netology.SearchEngine.SearchEngine;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +13,7 @@ import java.net.Socket;
 import java.util.Collections;
 import java.util.List;
 
-public class ServerImpl implements Server{
+public class ServerImpl implements Server {
     private SearchEngine searchEngine;
     public ServerImpl (SearchEngine searchEngine) {
         this.searchEngine = searchEngine;

@@ -1,4 +1,4 @@
-package ru.netology;
+package ru.netology.Server;
 
 public class ServerConfig {
     public static String host = "localhost";

@@ -1,4 +1,4 @@
-package ru.netology;
+package ru.netology.SearchEngine;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfPage;
@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class BooleanSearchEngine implements SearchEngine{
+public class BooleanSearchEngine implements SearchEngine {
     private Map<String, List<PageEntry>> wordsFromPdf = new HashMap<>();
 
     public BooleanSearchEngine(File pdfsDir) throws IOException {

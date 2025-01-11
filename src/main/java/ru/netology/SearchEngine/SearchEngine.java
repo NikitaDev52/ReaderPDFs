@@ -1,4 +1,4 @@
-package ru.netology;
+package ru.netology.SearchEngine;
 
 import java.util.List;
 
